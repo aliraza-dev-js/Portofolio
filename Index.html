@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ali Raza - Frontend Developer</title>
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+body {background:#0a0a0f; color:#fff; font-family:Arial,sans-serif;}
+header {text-align:center; padding:60px 20px; background:#1a1a2e; border-bottom:2px solid #00ffff; box-shadow:0 0 30px #00ffff;}
+header h1 {font-size:3em; color:#00ffff; text-shadow:0 0 20px #00ffff;}
+header p {color:#ff00ff; font-size:1.2em;}
+.container {max-width:1000px; margin:0 auto; padding:40px 20px;}
+section {display:none; margin-bottom:60px;}
+section.active {display:block;}
+h2 {color:#00ffff; font-size:2.5em; text-align:center; text-shadow:0 0 15px #00ffff; margin-bottom:20px;}
+.nav-btns {text-align:center; margin:30px 0;}
+.nav-btns button {padding:12px 25px; margin:0 10px; background:#ff00ff; border:none; border-radius:8px; color:#fff; cursor:pointer; font-weight:bold;}
+.nav-btns button:hover {background:#00ffff; color:#000; box-shadow:0 0 20px #00ffff;}
+/* Todo Styles */
+.todo-box {background:#1a1a2e; padding:20px; border-radius:15px; border:2px solid #ff00ff; box-shadow:0 0 20px #ff00ff;}
+#todo-input {width:70%; padding:10px; border:none; border-radius:8px;}
+#add-btn {padding:10px 20px; background:#00ffff; border:none; border-radius:8px; cursor:pointer;}
+li {list-style:none; background:#0a0a0f; margin:10px 0; padding:10px; border-radius:8px; display:flex; justify-content:space-between;}
+/* Calculator Styles */
+.calculator {background:#1a1a2e; padding:20px; border-radius:20px; box-shadow:0 0 30px #00ffff; max-width:300px; margin:auto;}
+#display {width:100%; height:60px; background:#000; color:#00ffff; font-size:2em; text-align:right; border:none; border-radius:10px; margin-bottom:15px;}
+.buttons {display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
+button {height:60px; font-size:1.5em; border:none; border-radius:10px; background:#2a2a3e; color:#fff; cursor:pointer;}
+.operator {background:#ff00ff;}.equal {background:#00ff00; color:#000; grid-column:span 2;}.clear {background:#ff0040;}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Ali Raza</h1>
+<p>Frontend Developer | JavaScript Enthusiast</p>
+</header>
+
+<div class="container">
+
+<div class="nav-btns">
+<button onclick="showSection('about')">About Me</button>
+<button onclick="showSection('todo')">To-Do App</button>
+<button onclick="showSection('calc')">Calculator</button>
+</div>
+
+<section id="about" class="active">
+<h2>About Me</h2>
+<p style="text-align:center;">Passionate frontend developer learning JavaScript and building cool projects. I create interactive web apps with neon aesthetics and clean code.</p>
+</section>
+
+<section id="todo">
+<h2>To-Do List App</h2>
+<div class="todo-box">
+<input type="text" id="todo-input" placeholder="Add a task...">
+<button id="add-btn">Add</button>
+<ul id="todo-list"></ul>
+</div>
+</section>
+
+<section id="calc">
+<h2>Neon Calculator</h2>
+<div class="calculator">
+<input type="text" id="display" disabled>
+<div class="buttons">
+<button class="clear" onclick="clearDisplay()">C</button>
+<button onclick="deleteLast()">⌫</button>
+<button class="operator" onclick="append('/')">/</button>
+<button class="operator" onclick="append('*')">*</button>
+<button onclick="append('7')">7</button><button onclick="append('8')">8</button><button onclick="append('9')">9</button>
+<button class="operator" onclick="append('-')">-</button>
+<button onclick="append('4')">4</button><button onclick="append('5')">5</button><button onclick="append('6')">6</button>
+<button class="operator" onclick="append('+')">+</button>
+<button onclick="append('1')">1</button><button onclick="append('2')">2</button><button onclick="append('3')">3</button>
+<button onclick="append('.')">.</button>
+<button onclick="append('0')">0</button>
+<button class="equal" onclick="calculate()">=</button>
+</div>
+</div>
+</section>
+
+</div>
+
+<script>
+// Navigation
+function showSection(id){
+document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+// Todo Logic
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+const input = document.getElementById('todo-input');
+const list = document.getElementById('todo-list');
+document.getElementById('add-btn').onclick = ()=>{if(input.value.trim()){tasks.push({text:input.value,done:false});input.value='';save();render();}};
+function render(){list.innerHTML='';tasks.forEach((t,i)=>{list.innerHTML+=`<li style="text-decoration:${t.done?'line-through':''}"><span onclick="toggle(${i})">${t.text}</span><button onclick="del(${i})">X</button></li>`});}
+function toggle(i){tasks[i].done=!tasks[i].done;save();render();}
+function del(i){tasks.splice(i,1);save();render();}
+function save(){localStorage.setItem('tasks',JSON.stringify(tasks));}
+render();
+
+// Calculator Logic
+let display=document.getElementById('display');
+function append(v){display.value+=v;}
+function clearDisplay(){display.value='';}
+function deleteLast(){display.value=display.value.slice(0,-1);}
+function calculate(){try{display.value=eval(display.value);}catch{display.value='Error';}}
+</script>
+
+</body>
+</html>
