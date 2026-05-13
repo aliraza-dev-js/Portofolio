@@ -56,7 +56,9 @@ button {height:60px; font-size:1.5em; border:none; border-radius:10px; backgroun
 <input type="text" id="todo-input" placeholder="Add a task...">
 <button id="add-btn">Add</button>
 <ul id="todo-list"></ul>
-</div>
+</div><input type="text" id="dict-input" placeholder="Word likho meaning ke liye">
+<button onclick="getMeaning()">Explain</button>
+<p id="meaning-box"></p>
 </section>
 
 <section id="calc">
@@ -83,7 +85,24 @@ button {height:60px; font-size:1.5em; border:none; border-radius:10px; backgroun
 </div>
 
 <script>
-// Navigation
+// Navigationasync function getMeaning() {
+  let word = document.getElementById("dict-input").value;
+  let box = document.getElementById("meaning-box");
+  
+  if(!word) return;
+  
+  box.innerText = "Searching...";
+  
+  let res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
+  let data = await res.json();
+  
+  if(data.title){
+    box.innerText = "Word nahi mila 😅";
+  } else {
+    let meaning = data[0].meanings[0].definitions[0].definition;
+    box.innerText = `${word}: ${meaning}`;
+  }
+}
 function showSection(id){
 document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
