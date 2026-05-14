@@ -394,12 +394,10 @@ function calculate(){
 }
 
 // Contact Form - fake submit for demo
-function sendMessage(e){
-  e.preventDefault();
-  document.getElementById('form-status').innerText="Message sent! Main jald reply karunga 🚀";
-  e.target.reset();
-  setTimeout(()=>{document.getElementById('form-status').innerText='';},3000);
-}
-</script>
+<form action="https://formspree.io/f/meenwrra" method="POST">
+  <input type="text" name="name" placeholder="Your Name" required>
+<input type="email" name="email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" required></textarea>
+<button type="submit">Send Message</button>
 </body>
 </html>
