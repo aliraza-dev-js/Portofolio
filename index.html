@@ -71,7 +71,6 @@
       margin-bottom: 15px;
     }
     
-    /* Calculator Styles */
     .calc {
       max-width: 300px;
       margin: 20px auto;
@@ -230,22 +229,22 @@
       event.target.classList.add('active');
     }
 
-    // Calculator Functions
-    let display = document.getElementById('display');
-    
+    // Calculator Functions - ab safe hai
     function append(val) {
-      display.value += val;
+      document.getElementById('display').value += val;
     }
     
     function clearDisplay() {
-      display.value = '';
+      document.getElementById('display').value = '';
     }
     
     function deleteChar() {
+      let display = document.getElementById('display');
       display.value = display.value.slice(0, -1);
     }
     
     function calculate() {
+      let display = document.getElementById('display');
       try {
         display.value = eval(display.value);
       } catch {
