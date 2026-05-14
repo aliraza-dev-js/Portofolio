@@ -3,86 +3,129 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ali Raza - Frontend Developer</title>
+<title>Portfolio</title>
 <style>
-* {margin:0; padding:0; box-sizing:border-box;}
-body {background:#0a0a0f; color:#fff; font-family:Arial,sans-serif;}
-header {text-align:center; padding:60px 20px; background:#1a1a2e; border-bottom:2px solid #00ffff; box-shadow:0 0 30px #00ffff;}
-header h1 {font-size:3em; color:#00ffff; text-shadow:0 0 20px #00ffff;}
-header p {color:#ff00ff; font-size:1.2em;}
-.container {max-width:1000px; margin:0 auto; padding:40px 20px;}
-section {display:none; margin-bottom:60px;}
-section.active {display:block;}
-h2 {color:#00ffff; font-size:2.5em; text-align:center; text-shadow:0 0 15px #00ffff; margin-bottom:20px;}
-.nav-btns {text-align:center; margin:30px 0;}
-.nav-btns button {padding:12px 25px; margin:0 10px; background:#ff00ff; border:none; border-radius:8px; color:#fff; cursor:pointer; font-weight:bold;}
-.nav-btns button:hover {background:#00ffff; color:#000; box-shadow:0 0 20px #00ffff;}
-/* Todo Styles */
-.todo-box {background:#1a1a2e; padding:20px; border-radius:15px; border:2px solid #ff00ff; box-shadow:0 0 20px #ff00ff;}
-#todo-input {width:70%; padding:10px; border:none; border-radius:8px;}
-#add-btn {padding:10px 20px; background:#00ffff; border:none; border-radius:8px; cursor:pointer;}
-li {list-style:none; background:#0a0a0f; margin:10px 0; padding:10px; border-radius:8px; display:flex; justify-content:space-between;}
-/* Calculator Styles */
-.calculator {background:#1a1a2e; padding:20px; border-radius:20px; box-shadow:0 0 30px #00ffff; max-width:300px; margin:auto;}
-#display {width:100%; height:60px; background:#000; color:#00ffff; font-size:2em; text-align:right; border:none; border-radius:10px; margin-bottom:15px;}
-.buttons {display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
-button {height:60px; font-size:1.5em; border:none; border-radius:10px; background:#2a2a3e; color:#fff; cursor:pointer;}
-.operator {background:#ff00ff;}.equal {background:#00ff00; color:#000; grid-column:span 2;}.clear {background:#ff0040;}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f4f4;
+}
+header {
+  background: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+.container {
+  padding: 20px;
+}
+nav {
+  text-align: center;
+  margin: 20px 0;
+}
+nav button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+nav button:hover {
+  background: #555;
+}
+.section {
+  display: none;
+}
+.section.active {
+  display: block;
+}
+.calculator {
+  max-width: 300px;
+  margin: auto;
+}
+.calculator input {
+  width: 100%;
+  height: 50px;
+  text-align: right;
+  font-size: 24px;
+}
+.calculator button {
+  width: 23%;
+  height: 50px;
+  margin: 1%;
+  font-size: 18px;
+}
 </style>
 </head>
 <body>
-
 <header>
-<h1>Ali Raza</h1>
-<p>Frontend Developer | JavaScript Enthusiast</p>
+  <h1>Ali Raza</h1>
+  <p>Frontend Developer | JavaScript Enthusiast</p>
 </header>
 
 <div class="container">
+  <nav>
+    <button onclick="showSection('about')">About Me</button>
+    <button onclick="showSection('todo')">To-Do App</button>
+    <button onclick="showSection('calc')">Calculator</button>
+  </nav>
 
-<div class="nav-btns">
-<button onclick="showSection('about')">About Me</button>
-<button onclick="showSection('todo')">To-Do App</button>
-<button onclick="showSection('calc')">Calculator</button>
+  <section id="about" class="section active">
+    <h2>About Me</h2>
+    <p style="text-align:center;">Passionate frontend developer learning JavaScript and building cool projects. I create interactive web apps.</p>
+  </section>
+
+  <section id="todo" class="section">
+    <h2>To-Do List App</h2>
+    <div class="todo-app">
+      <input type="text" id="todo-input" placeholder="Add a task...">
+      <button id="add-btn">Add</button>
+      <ul id="todo-list"></ul>
+      
+      <hr>
+      
+      <h3>Dictionary</h3>
+      <input type="text" id="dict-input" placeholder="Word likho meaning ke liye">
+      <button onclick="getMeaning()">Explain</button>
+      <p id="meaning-box"></p>
+    </div>
+  </section>
+
+  <section id="calc" class="section">
+    <h2>Neon Calculator</h2>
+    <div class="calculator">
+      <input type="text" id="display" disabled>
+      <div class="buttons">
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="deleteLast()">⌫</button>
+        <button onclick="append('/')">/</button>
+        <button onclick="append('*')">*</button>
+        
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button onclick="append('-')">-</button>
+        
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button onclick="append('+')">+</button>
+        
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button onclick="append('.')">.</button>
+        
+        <button onclick="append('0')">0</button>
+        <button class="equal" onclick="calculate()">=</button>
+      </div>
+    </div>
+  </section>
 </div>
 
-<section id="about" class="active">
-<h2>About Me</h2>
-<p style="text-align:center;">Passionate frontend developer learning JavaScript and building cool projects. I create interactive web apps with neon aesthetics and clean code.</p>
-</section>
-
-<section id="todo">
-<h2>To-Do List App</h2>
-<div class="todo-box">
-<input type="text" id="todo-input" placeholder="Add a task...">
-<button id="add-btn">Add</button>
-<ul id="todo-list"></ul>
-</div><input type="text" id="dict-input" placeholder="Word likho meaning ke liye">
-<button onclick="getMeaning()">Explain</button>
-<p id="meaning-box"></p>
-</section>
-
-<section id="calc">
-<h2>Neon Calculator</h2>
-<div class="calculator">
-<input type="text" id="display" disabled>
-<div class="buttons">
-<button class="clear" onclick="clearDisplay()">C</button>
-<button onclick="deleteLast()">⌫</button>
-<button class="operator" onclick="append('/')">/</button>
-<button class="operator" onclick="append('*')">*</button>
-<button onclick="append('7')">7</button><button onclick="append('8')">8</button><button onclick="append('9')">9</button>
-<button class="operator" onclick="append('-')">-</button>
-<button onclick="append('4')">4</button><button onclick="append('5')">5</button><button onclick="append('6')">6</button>
-<button class="operator" onclick="append('+')">+</button>
-<button onclick="append('1')">1</button><button onclick="append('2')">2</button><button onclick="append('3')">3</button>
-<button onclick="append('.')">.</button>
-<button onclick="append('0')">0</button>
-<button class="equal" onclick="calculate()">=</button>
-</div>
-</div>
-</section>
-
-</div>
 <script>
 function showSection(id){
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -108,7 +151,53 @@ async function getMeaning() {
     box.innerText = "Error aa gaya";
   }
 }
-</script>
 
+// To-Do App Logic
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+const input = document.getElementById('todo-input');
+const list = document.getElementById('todo-list');
+
+function renderTasks(){
+  list.innerHTML = '';
+  tasks.forEach((task, i) => {
+    list.innerHTML += `<li>${task} <button onclick="deleteTask(${i})">X</button></li>`;
+  });
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+document.getElementById('add-btn').onclick = () => {
+  if(input.value.trim()){
+    tasks.push(input.value.trim());
+    input.value = '';
+    renderTasks();
+  }
+};
+
+function deleteTask(i){
+  tasks.splice(i,1);
+  renderTasks();
+}
+
+renderTasks();
+
+// Calculator Logic
+function append(val){
+  document.getElementById('display').value += val;
+}
+function clearDisplay(){
+  document.getElementById('display').value = '';
+}
+function deleteLast(){
+  let val = document.getElementById('display').value;
+  document.getElementById('display').value = val.slice(0,-1);
+}
+function calculate(){
+  try{
+    document.getElementById('display').value = eval(document.getElementById('display').value);
+  } catch(e){
+    document.getElementById('display').value = 'Error';
+  }
+}
+</script>
 </body>
 </html>
