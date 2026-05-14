@@ -71,6 +71,47 @@
       margin-bottom: 15px;
     }
     
+    /* Calculator Styles */
+    .calc {
+      max-width: 300px;
+      margin: 20px auto;
+    }
+    
+    #display {
+      width: 100%;
+      height: 60px;
+      background: #1a1a1a;
+      border: 2px solid #00f0ff;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 24px;
+      text-align: right;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .btns {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    
+    .btns button {
+      padding: 20px;
+      font-size: 20px;
+      border: 2px solid #ff00ff;
+      background: #1a1a1a;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    
+    .btns button:hover {
+      background: #ff00ff;
+      box-shadow: 0 0 15px #ff00ff;
+    }
+    
     form {
       display: flex;
       flex-direction: column;
@@ -145,7 +186,29 @@
 
     <section id="calculator">
       <h2>Calculator</h2>
-      <p>Calculator ka content yahan aayega.</p>
+      <div class="calc">
+        <input type="text" id="display" readonly>
+        <div class="btns">
+          <button onclick="clearDisplay()">C</button>
+          <button onclick="deleteChar()">⌫</button>
+          <button onclick="append('/')">/</button>
+          <button onclick="append('*')">*</button>
+          <button onclick="append('7')">7</button>
+          <button onclick="append('8')">8</button>
+          <button onclick="append('9')">9</button>
+          <button onclick="append('-')">-</button>
+          <button onclick="append('4')">4</button>
+          <button onclick="append('5')">5</button>
+          <button onclick="append('6')">6</button>
+          <button onclick="append('+')">+</button>
+          <button onclick="append('1')">1</button>
+          <button onclick="append('2')">2</button>
+          <button onclick="append('3')">3</button>
+          <button onclick="calculate()">=</button>
+          <button onclick="append('0')" style="grid-column: span 2;">0</button>
+          <button onclick="append('.')">.</button>
+        </div>
+      </div>
     </section>
 
     <section id="contact">
@@ -165,6 +228,29 @@
       document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
       document.getElementById(id).style.display = 'block';
       event.target.classList.add('active');
+    }
+
+    // Calculator Functions
+    let display = document.getElementById('display');
+    
+    function append(val) {
+      display.value += val;
+    }
+    
+    function clearDisplay() {
+      display.value = '';
+    }
+    
+    function deleteChar() {
+      display.value = display.value.slice(0, -1);
+    }
+    
+    function calculate() {
+      try {
+        display.value = eval(display.value);
+      } catch {
+        display.value = 'Error';
+      }
     }
   </script>
 
