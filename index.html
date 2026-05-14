@@ -83,7 +83,6 @@ button {height:60px; font-size:1.5em; border:none; border-radius:10px; backgroun
 </section>
 
 </div>
-
 <script><script>
 function showSection(id){
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -93,15 +92,12 @@ function showSection(id){
 async function getMeaning() {
   let word = document.getElementById("dict-input").value;
   let box = document.getElementById("meaning-box");
-  
   if(!word) return;
   
   box.innerText = "Searching...";
-  
   try {
     let res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
     let data = await res.json();
-    
     if(data.title){
       box.innerText = "Word nahi mila 😅";
     } else {
@@ -112,47 +108,6 @@ async function getMeaning() {
     box.innerText = "Error aa gaya";
   }
 }
-</script>
-// Navigationasync function getMeaning() {
-  let word = document.getElementById("dict-input").value;
-  let box = document.getElementById("meaning-box");
-  
-  if(!word) return;
-  
-  box.innerText = "Searching...";
-  
-  let res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
-  let data = await res.json();
-  
-  if(data.title){
-    box.innerText = "Word nahi mila 😅";
-  } else {
-    let meaning = data[0].meanings[0].definitions[0].definition;
-    box.innerText = `${word}: ${meaning}`;
-  }
-}
-function showSection(id){
-document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-document.getElementById(id).classList.add('active');
-}
-
-// Todo Logic
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-const input = document.getElementById('todo-input');
-const list = document.getElementById('todo-list');
-document.getElementById('add-btn').onclick = ()=>{if(input.value.trim()){tasks.push({text:input.value,done:false});input.value='';save();render();}};
-function render(){list.innerHTML='';tasks.forEach((t,i)=>{list.innerHTML+=`<li style="text-decoration:${t.done?'line-through':''}"><span onclick="toggle(${i})">${t.text}</span><button onclick="del(${i})">X</button></li>`});}
-function toggle(i){tasks[i].done=!tasks[i].done;save();render();}
-function del(i){tasks.splice(i,1);save();render();}
-function save(){localStorage.setItem('tasks',JSON.stringify(tasks));}
-render();
-
-// Calculator Logic
-let display=document.getElementById('display');
-function append(v){display.value+=v;}
-function clearDisplay(){display.value='';}
-function deleteLast(){display.value=display.value.slice(0,-1);}
-function calculate(){try{display.value=eval(display.value);}catch{display.value='Error';}}
 </script>
 
 </body>
