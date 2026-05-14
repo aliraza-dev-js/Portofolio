@@ -401,3 +401,12 @@ function calculate(){
 <button type="submit">Send Message</button>
 </body>
 </html>
+<script>
+function showSection(id){
+  document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).style.display = 'block';
+  event.target.classList.add('active');
+}
+</script>
+</body>
