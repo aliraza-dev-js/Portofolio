@@ -120,11 +120,11 @@
   <p class="subtitle">Frontend Developer | JavaScript Enthusiast</p>
 
   <nav>
-    <button class="active" onclick="showSection('about')">About Me</button>
-    <button onclick="showSection('projects')">Projects</button>
-    <button onclick="showSection('todo-app')">To-Do App</button>
-    <button onclick="showSection('calculator')">Calculator</button>
-    <button onclick="showSection('contact')">Contact</button>
+    <button class="active" onclick="showSection('about', event)">About Me</button>
+    <button onclick="showSection('projects', event)">Projects</button>
+    <button onclick="showSection('todo-app', event)">To-Do App</button>
+    <button onclick="showSection('calculator', event)">Calculator</button>
+    <button onclick="showSection('contact', event)">Contact</button>
   </nav>
 
   <main>
@@ -160,7 +160,7 @@
   </main>
 
   <script>
-    function showSection(id) {
+    function showSection(id, event) {
       document.querySelectorAll('section').forEach(s => s.style.display = 'none');
       document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
       document.getElementById(id).style.display = 'block';
