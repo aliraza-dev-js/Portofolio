@@ -25,7 +25,7 @@
       text-shadow: 0 0 20px #00f0ff;
     }
     
-    .subtitle {
+   .subtitle {
       color: #ff00ff;
       margin-bottom: 30px;
     }
@@ -71,7 +71,70 @@
       margin-bottom: 15px;
     }
     
-    .calc {
+    /* To-Do App */
+   .todo-box {
+      max-width: 400px;
+      margin: 20px auto;
+    }
+    
+   .todo-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+   .todo-input input {
+      flex: 1;
+      padding: 12px;
+      border: 2px solid #00f0ff;
+      background: #1a1a1a;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    
+   .todo-input button {
+      padding: 12px 20px;
+      background: #ff00ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+   .todo-list {
+      list-style: none;
+      text-align: left;
+    }
+    
+   .todo-list li {
+      background: #1a1a1a;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border-left: 4px solid #00f0ff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+   .todo-list li.done {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+    
+   .todo-list button {
+      background: #ff4444;
+      border: none;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    /* Calculator */
+   .calc {
       max-width: 300px;
       margin: 20px auto;
     }
@@ -89,13 +152,13 @@
       margin-bottom: 10px;
     }
     
-    .btns {
+   .btns {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 10px;
     }
     
-    .btns button {
+   .btns button {
       padding: 20px;
       font-size: 20px;
       border: 2px solid #ff00ff;
@@ -103,12 +166,6 @@
       color: #fff;
       border-radius: 10px;
       cursor: pointer;
-      transition: 0.2s;
-    }
-    
-    .btns button:hover {
-      background: #ff00ff;
-      box-shadow: 0 0 15px #ff00ff;
     }
     
     form {
@@ -127,16 +184,6 @@
       font-size: 16px;
     }
     
-    input:focus, textarea:focus {
-      outline: none;
-      box-shadow: 0 0 10px #00f0ff;
-    }
-    
-    textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-    
     form button {
       padding: 12px;
       background: #ff00ff;
@@ -146,11 +193,6 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
-    }
-    
-    form button:hover {
-      box-shadow: 0 0 20px #ff00ff;
     }
   </style>
 </head>
@@ -175,12 +217,20 @@
 
     <section id="projects">
       <h2>Projects</h2>
-      <p>Yahan tum apne projects add karna.</p>
+      <p><strong>1. To-Do App</strong> - Task manager with local storage</p>
+      <p><strong>2. Calculator</strong> - Basic calculator with neon UI</p>
+      <p><strong>3. Portfolio Website</strong> - This website you're seeing now</p>
     </section>
 
     <section id="todo-app">
       <h2>To-Do App</h2>
-      <p>To-Do App ka content yahan aayega.</p>
+      <div class="todo-box">
+        <div class="todo-input">
+          <input type="text" id="taskInput" placeholder="Enter task...">
+          <button onclick="addTask()">Add</button>
+        </div>
+        <ul class="todo-list" id="taskList"></ul>
+      </div>
     </section>
 
     <section id="calculator">
@@ -229,7 +279,44 @@
       event.target.classList.add('active');
     }
 
-    // Calculator Functions - ab safe hai
+    // To-Do App Functions
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    
+    function renderTasks() {
+      const list = document.getElementById('taskList');
+      list.innerHTML = '';
+      tasks.forEach((task, index) => {
+        list.innerHTML += `
+          <li class="${task.done? 'done' : ''}">
+            <span onclick="toggleTask(${index})">${task.text}</span>
+            <button onclick="deleteTask(${index})">X</button>
+          </li>
+        `;
+      });
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+    
+    function addTask() {
+      const input = document.getElementById('taskInput');
+      if (input.value.trim() === '') return;
+      tasks.push({ text: input.value, done: false });
+      input.value = '';
+      renderTasks();
+    }
+    
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      renderTasks();
+    }
+    
+    function toggleTask(index) {
+      tasks[index].done =!tasks[index].done;
+      renderTasks();
+    }
+    
+    renderTasks();
+
+    // Calculator Functions
     function append(val) {
       document.getElementById('display').value += val;
     }
