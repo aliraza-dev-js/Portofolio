@@ -3,22 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio</title>
+<title>Ali Raza Portfolio</title>
 <style>
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f4f4f4;
+  background: #0a0a0a;
+  color: #fff;
 }
 header {
-  background: #333;
-  color: #fff;
+  background: #111;
+  color: #0ff;
   padding: 20px;
   text-align: center;
+  box-shadow: 0 0 20px #0ff;
 }
 .container {
   padding: 20px;
+  max-width: 800px;
+  margin: auto;
 }
 nav {
   text-align: center;
@@ -28,35 +32,63 @@ nav button {
   margin: 5px;
   padding: 10px 20px;
   border: none;
-  background: #333;
+  background: #ff00ff;
   color: #fff;
   cursor: pointer;
   border-radius: 5px;
+  font-weight: bold;
 }
-nav button:hover {
-  background: #555;
+nav button:nth-child(2) {
+  background: #00ffff;
+  color: #000;
 }
 .section {
   display: none;
+  padding: 20px;
+  background: #111;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #ff00ff;
+  margin-top: 20px;
 }
 .section.active {
   display: block;
 }
+input, button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  border: none;
+}
+#todo-input, #dict-input {
+  width: 70%;
+}
 .calculator {
   max-width: 300px;
   margin: auto;
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #00ffff;
 }
 .calculator input {
   width: 100%;
   height: 50px;
   text-align: right;
   font-size: 24px;
+  background: #000;
+  color: #0ff;
 }
 .calculator button {
   width: 23%;
   height: 50px;
   margin: 1%;
   font-size: 18px;
+  background: #333;
+  color: #fff;
+}
+.calculator button.equal {
+  background: #00ff00;
+  color: #000;
 }
 </style>
 </head>
@@ -75,7 +107,7 @@ nav button:hover {
 
   <section id="about" class="section active">
     <h2>About Me</h2>
-    <p style="text-align:center;">Passionate frontend developer learning JavaScript and building cool projects. I create interactive web apps.</p>
+    <p style="text-align:center;">Passionate frontend developer learning JavaScript and building cool projects.</p>
   </section>
 
   <section id="todo" class="section">
@@ -85,7 +117,7 @@ nav button:hover {
       <button id="add-btn">Add</button>
       <ul id="todo-list"></ul>
       
-      <hr>
+      <hr style="margin:20px 0;">
       
       <h3>Dictionary</h3>
       <input type="text" id="dict-input" placeholder="Word likho meaning ke liye">
