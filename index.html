@@ -20,7 +20,6 @@
       text-align: center; 
     }
     
-    /* Typing effect */
     .typing {
       display: inline-block;
       overflow: hidden;
@@ -91,7 +90,6 @@
       font-weight: bold;
     }
 
-    /* Scroll animation - hidden by default */
     .hidden {
       opacity: 0;
       transform: translateY(40px);
@@ -103,7 +101,6 @@
       transform: translateY(0);
     }
 
-    /* Neon glow on hover */
     .card:hover {
       box-shadow: 0 0 15px #00f7ff, 0 0 25px #ff00ff;
       transform: scale(1.03);
@@ -155,7 +152,6 @@
   </footer>
 
   <script>
-    // Scroll animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
