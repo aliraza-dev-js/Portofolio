@@ -20,17 +20,18 @@
       text-align: center; 
     }
     
+    /* Fixed typing effect */
     .typing {
       display: inline-block;
-      overflow: hidden;
       border-right: 2px solid #00f7ff;
       white-space: nowrap;
-      animation: typing 3s steps(30, end), blink 0.7s infinite;
+      overflow: hidden;
+      animation: typing 2.5s steps(8, end), blink 0.7s step-end infinite;
     }
     
     @keyframes typing {
       from { width: 0 }
-      to { width: 100% }
+      to { width: 8ch } /* 8 characters = Ali Raza */
     }
     
     @keyframes blink {
@@ -106,12 +107,6 @@
       transform: scale(1.03);
       transition: all 0.3s ease;
     }
-    
-    .btn:hover {
-      box-shadow: 0 0 15px #00f7ff;
-      transform: scale(1.05);
-      transition: all 0.3s ease;
-    }
   </style>
 </head>
 <body>
@@ -128,12 +123,12 @@
       <div class="card">
         <h3>To-Do List App</h3>
         <p>Simple app to add and manage daily tasks.</p>
-        <a href="#" target="_blank">View Project →</a>
+        <a href="javascript:void(0)">Coming Soon</a>
       </div>
       <div class="card">
         <h3>Calculator</h3>
         <p>Basic calculator using JavaScript.</p>
-        <a href="#" target="_blank">View Project →</a>
+        <a href="javascript:void(0)">Coming Soon</a>
       </div>
     </div>
   </section>
@@ -160,8 +155,7 @@
       });
     });
     
-    const hiddenElements = document.querySelectorAll('.hidden');
-    hiddenElements.forEach(el => observer.observe(el));
+    document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
   </script>
 
 </body>
