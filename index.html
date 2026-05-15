@@ -20,22 +20,17 @@
       text-align: center; 
     }
     
-    /* Fixed typing effect */
+    /* Typing effect WITHOUT cursor bar */
     .typing {
       display: inline-block;
-      border-right: 2px solid #00f7ff;
       white-space: nowrap;
       overflow: hidden;
-      animation: typing 2.5s steps(8, end), blink 0.7s step-end infinite;
+      animation: typing 2.5s steps(8, end);
     }
     
     @keyframes typing {
       from { width: 0 }
-      to { width: 8ch } /* 8 characters = Ali Raza */
-    }
-    
-    @keyframes blink {
-      50% { border-color: transparent }
+      to { width: 8ch }
     }
     
     section { 
